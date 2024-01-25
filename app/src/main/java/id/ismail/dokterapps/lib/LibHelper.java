@@ -5,7 +5,7 @@ import android.text.TextUtils;
 import java.util.Calendar;
 
 public class LibHelper {
-    public static String my_url = "https://klinik.ismail.id/myklinik/notification-admin";
+    public static String my_url = "http://10.0.2.2/klinik-reservation/notification-admin";
 
     public static String getDeviceName() {
         String manufacturer = Build.MANUFACTURER;
