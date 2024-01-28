@@ -1,15 +1,10 @@
 package id.ismail.dokterapps.lib;
 
-import android.annotation.SuppressLint;
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.os.Build;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -37,72 +32,27 @@ public class MyFirebaseInstanceService extends FirebaseMessagingService {
     }
 
     private void showNotification(String title, String body) {
-        // Create a notification manager
-        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        Log.d("TAG", "showNotification: " + title + " " + body);
+        Intent intent = new Intent(this, PasienActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_MUTABLE);
 
-        // Create an intent for the notification
-        Intent notificationIntent = new Intent(this, PasienActivity.class);
-        notificationIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-
-        // Create a pending intent
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 1 /* Request code */, notificationIntent, PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE);
-
-        // Create a notification channel
-        String NOTIF_ID = "id.ismail.dokterapps";
-        NotificationChannel notificationChannel = new NotificationChannel(NOTIF_ID, "Notifikasi Pasien Hadir", NotificationManager.IMPORTANCE_DEFAULT);
-        notificationChannel.setDescription(body);
-        notificationChannel.enableLights(true);
-        notificationChannel.setLightColor(Color.BLUE);
-        notificationChannel.enableVibration(true);
-        notificationManager.createNotificationChannel(notificationChannel);
-
-        // Build the notification
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, NOTIF_ID)
-                .setSmallIcon(R.drawable.logo)
-                .setLargeIcon(BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.logo))
+        String channelId = "id.ismail.dokterapps";
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, channelId)
+                .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle(title)
                 .setContentText(body)
                 .setAutoCancel(true)
-                .setContentInfo("Informasi")
-                .setPriority(Notification.PRIORITY_DEFAULT)
-                .setDefaults(Notification.DEFAULT_ALL)
                 .setContentIntent(pendingIntent);
 
-        // Display the notification
-        notificationManager.notify(1 /* ID of notification */, notificationBuilder.build());
+        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-//        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-//        Intent notificationIntent;
-//        notificationIntent = new Intent(this, PasienActivity.class);
-//        notificationIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
-//                Intent.FLAG_ACTIVITY_SINGLE_TOP);
-//        @SuppressLint("UnspecifiedImmutableFlag") PendingIntent pendingIntent = PendingIntent.getActivity(this, 1 /* Request code */, notificationIntent,
-//                PendingIntent.FLAG_ONE_SHOT);
-//
-//
-//        String NOTIF_ID = "id.ismail.dokterapps";
-//
-//        NotificationChannel notificationChannel = new NotificationChannel(NOTIF_ID, "Notifikasi Pasien Hadir",
-//                NotificationManager.IMPORTANCE_DEFAULT);
-//
-//        notificationChannel.setDescription(body);
-//        notificationChannel.enableLights(true);
-//        notificationChannel.setLightColor(Color.BLUE);
-//        notificationChannel.enableVibration(true);
-//        notificationManager.createNotificationChannel(notificationChannel);
-//
-//        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, NOTIF_ID)
-//                .setSmallIcon(R.drawable.logo)
-//                .setLargeIcon(BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.logo))
-//                .setContentTitle(title)
-//                .setContentText(body)
-//                .setAutoCancel(true)
-//                .setContentInfo("Informasi")
-//                .setPriority(Notification.PRIORITY_DEFAULT)
-//                .setDefaults(Notification.DEFAULT_ALL)
-//                .setContentIntent(pendingIntent);
-//        notificationManager.notify(1 /* ID of notification */, notificationBuilder.build());
+        NotificationChannel channel = new NotificationChannel(channelId, "Patient Channel", NotificationManager.IMPORTANCE_HIGH);
+        manager.createNotificationChannel(channel);
+
+        manager.notify(0, builder.build());
     }
+
 
     @Override
     public void onNewToken(@NonNull String s) {

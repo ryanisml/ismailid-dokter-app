@@ -35,6 +35,7 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import id.ismail.dokterapps.lib.NotificationPermissionHandler;
 import id.ismail.dokterapps.lib.SharedDokter;
 
 public class MainActivity extends AppCompatActivity {
@@ -53,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         mContext = this;
         sharedDokter = new SharedDokter(mContext);
         db = FirebaseFirestore.getInstance();
-
+        NotificationPermissionHandler.checkNotificationPermission(mContext);
         lnrKeluar = findViewById(R.id.lnr_keluar);
         lnrPanggil = findViewById(R.id.lnr_panggil);
         lnrReservasi = findViewById(R.id.lnr_reservasi);
