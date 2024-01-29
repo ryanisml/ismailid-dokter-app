@@ -2,7 +2,7 @@
 ## About
 #### This is an example mobile android application - clinic reservation for Doctor.
 This project is linked with :
-- [Web Admin Doctor](https://github.com/ryanisml/klinik-reservation)
+- [Web Admin Reservation](https://github.com/ryanisml/klinik-reservation)
 - [Mobile Doctor Apps](https://github.com/ryanisml/ismailid-dokter-app)
 - [Mobile Patient Apps](https://github.com/ryanisml/ismailid-pasien-app)
 
@@ -33,6 +33,7 @@ This is an login user you can use for test :
 username : ryanisml@gmail.com
 password : 123456
 ```
+or if you want to test registration, add your data first at Web Admin Reservation
 
 ## Documentation
 If you have any question related to this project, feel free to contact me at my github <br/>
