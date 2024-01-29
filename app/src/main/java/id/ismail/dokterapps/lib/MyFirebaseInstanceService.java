@@ -32,7 +32,6 @@ public class MyFirebaseInstanceService extends FirebaseMessagingService {
     }
 
     private void showNotification(String title, String body) {
-        Log.d("TAG", "showNotification: " + title + " " + body);
         Intent intent = new Intent(this, PasienActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_MUTABLE);
