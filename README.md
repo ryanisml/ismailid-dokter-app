@@ -1,16 +1,21 @@
 # Doctor Apps
-#### Mobile Application to Monitoring Health
+## About
+#### This is an example mobile android application - clinic reservation for Doctor.
 This project is linked with :
 - [Web Admin Doctor](https://github.com/ryanisml/klinik-reservation)
 - [Mobile Doctor Apps](https://github.com/ryanisml/ismailid-dokter-app)
 - [Mobile Patient Apps](https://github.com/ryanisml/ismailid-pasien-app)
 
+## Tools
 This app made with
 - Java.
 - HttpConnection.
-- Firebase (Google-Services.json) not include at this package.
-- Synchronize data with three apps.
-- You can download this app from https://play.google.com/store/apps/developer?id=Ryan+Ismail.
+- Firebase Analytics.
+- Firebase Crashlytics.
+- Firestore Database.
+- Firebase Messaging.
+- Synchronize data with 3 apps.
+- Playstore.
 
 ## Installation
 1. To use this project, make sure to create firebase account first at [Firebase Console](https://console.firebase.google.com/)
